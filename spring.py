@@ -49,7 +49,7 @@ fulldata222 = np.array([[2,5,5],
                        
                        )
 df = pd.DataFrame(fulldata, columns = ['X','Y','Z'])
-df.to_csv("./data.csv") # location adress for saving the data
+# df.to_csv("./data.csv") # location adress for saving the data
 print(df)
 df.plot()
 plt.show()
