@@ -1,0 +1,57 @@
+import random 
+import numpy as np 
+import time
+import pandas as pd
+import matplotlib.pyplot as plt
+full_test = np.array([[0,0]])
+fulldata = np.array([[0,0]])
+loop= 0 
+while loop <1000 : 
+    m = random.uniform(0.1, 1)
+    g = 9.8 #N/kg
+    y = random.uniform(0.1, 1)
+    v = 0 #m/s
+
+    t = 0 
+    dt = 0.01
+
+    k =random.uniform(1, 20)
+    F0 = random.uniform(1, 10)
+    # F0 = 0
+   
+    pre_data = {
+        "m" :m , 
+        "g":g , 
+        "y":y , 
+        "v":v , 
+        "t":t, 
+        "dt":dt, 
+        "k":k,
+        "F0":F0
+        
+    }
+    print ( pre_data)
+  
+    while t < 10:
+        F = -k*y + F0 - m*g
+        a = F/m 
+        v = v + a*dt
+        y = y + v*dt
+        t = t + dt
+        fulldata = np.concatenate((fulldata ,[[t,y]]))
+    
+    full_test = np.concatenate((full_test ,[[pre_data,fulldata]]))
+    print ("loop ", loop ,"is done !")
+    loop = loop + 1 
+    
+    # print(fulldata)
+    
+
+
+print(full_test ) 
+df = pd.DataFrame(full_test , columns = ["setting","Y"])
+df.to_csv("./data.csv")
+# print(df)
+# df.plot()
+# plt.show()
+# 
